@@ -36,16 +36,17 @@ int gcd(int num1, int num2) {
 }
 
 int powMod(int a, int b, int n) {
-	long long x = 1, y = a;
-
-	while (b > 0) {
-		if (b % 2 == 1)
-			x = (x * y) % n;
-		y = (y * y) % n;
-		b /= 2;
+	
+	long long x = a;
+	while (b-1 > 0) {
+		x = x * a;
+		if(x > n){
+			x = x%n;
+		}
+		b--;
 	}
 
-	return x % n;
+	return x;
 }
 
 int main(int argc, char* argv[]) {
@@ -59,11 +60,11 @@ int main(int argc, char* argv[]) {
 		scanf("%d %d", &p, &q);
 
 		if (!(checkPrime(p) && checkPrime(q)))
-			printf("Os numeros n„o s„o primos. Por favor digite n˙meros primos\n");
+			printf("Os numeros n√£o s√£o primos. Por favor digite n√∫meros primos\n");
 		else if (!checkPrime(p))
-			printf("O primeiro numero n„o È primo. Por favor digite n˙meros primos\n");
+			printf("O primeiro numero n√£o √© primo. Por favor digite n√∫meros primos\n");
 		else if (!checkPrime(q))
-			printf("O Segundo numero n„o È primo. Por favor digite n˙meros primos\n");
+			printf("O Segundo numero n√£o √© primo. Por favor digite n√∫meros primos\n");
 		else
 			break;
 	}
@@ -74,7 +75,9 @@ int main(int argc, char* argv[]) {
 	phin = (p - 1) * (q - 1);
 	printf("phi(N): %d\n", phin);
 	
-	int e = 3;
+	int e = 2;
+	
+	//	divisor comun
 	e = gcd(phin, e);
 	
 	int d = 0;
